@@ -1,6 +1,7 @@
 import { DateTime } from 'luxon'
 import Hash from '@ioc:Adonis/Core/Hash'
-import { column, beforeSave, BaseModel } from '@ioc:Adonis/Lucid/Orm'
+import { column, beforeSave, BaseModel, hasOne, HasOne } from '@ioc:Adonis/Lucid/Orm'
+import Client from './Client'
 
 export default class User extends BaseModel {
   @column({ isPrimary: true })
@@ -17,6 +18,9 @@ export default class User extends BaseModel {
 
   @column()
   public type: string
+
+  @hasOne(() => Client)
+  public user: HasOne<typeof Client>
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

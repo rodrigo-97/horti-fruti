@@ -14,7 +14,7 @@ export default class extends BaseSchema {
         .inTable('users')
         .onDelete('cascade')
       table.string('name', 255)
-      table.string('phone', 11)
+      table.string('phone', 15)
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
     })
