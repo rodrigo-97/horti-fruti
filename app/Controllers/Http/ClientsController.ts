@@ -27,7 +27,7 @@ export default class ClientsController {
       trx.commit()
       return response.ok(client)
     } catch (error) {
-      console.log(error)
+      error
       trx.rollback()
       return response.unprocessableEntity()
     }
@@ -64,7 +64,7 @@ export default class ClientsController {
 
       return response.noContent()
     } catch (error) {
-      console.log(error)
+      error
       trx.rollback()
       return response.badRequest({ error: 'Could not possible to update client data' })
     }

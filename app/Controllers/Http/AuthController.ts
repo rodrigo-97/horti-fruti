@@ -11,8 +11,6 @@ export default class AuthController {
     const email = request.input('email')
     const password = request.input('password')
 
-    console.log({ email, password })
-
     try {
       const user = await User.findByOrFail('email', email)
       const expiresIn = '7days'
@@ -43,8 +41,6 @@ export default class AuthController {
     const user = await auth.use('api').authenticate()
     const data: UserType = {}
 
-    console.log(user.type)
-
     try {
       if (user.type === UserTypeEnum.ADMIN) {
         const admin = await Admin.findByOrFail('userId', user.id)
@@ -53,7 +49,6 @@ export default class AuthController {
 
       if (user.type === UserTypeEnum.STORE) {
         const store = await Store.findByOrFail('userId', user.id)
-        console.log(store)
         data.store = store
       }
 

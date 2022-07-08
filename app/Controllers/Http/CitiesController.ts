@@ -17,7 +17,7 @@ export default class CitiesController {
 
       return response.ok(cities)
     } catch (error) {
-      console.log(error)
+      error
       return response.badRequest({ error: 'Could not find any city' })
     }
   }

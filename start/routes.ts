@@ -12,31 +12,30 @@ Route.group(() => {
     .prefix('/auth')
     .middleware('auth')
 
-  // Client
   Route.group(() => {
-    Route.get('/', 'ClientsController.findAll')
-  })
-    .prefix('/clients')
-    .middleware('auth')
+    // Client
+    Route.group(() => {
+      Route.get('/', 'ClientsController.findAll')
+    }).prefix('/clients')
 
-  // Client
-  Route.group(() => {
-    Route.post('/', 'CitiesController.create')
-    Route.get('/', 'CitiesController.findAll')
-    Route.get('/:id', 'CitiesController.find')
-    Route.put('/:id', 'CitiesController.update')
-    Route.delete('/:id', 'CitiesController.delete')
-  })
-    .prefix('/cities')
-    .middleware('auth')
+    // Client
+    Route.group(() => {
+      Route.post('/', 'CitiesController.create')
+      Route.get('/', 'CitiesController.findAll')
+      Route.get('/:id', 'CitiesController.find')
+      Route.put('/:id', 'CitiesController.update')
+      Route.delete('/:id', 'CitiesController.delete')
+    }).prefix('/cities')
 
-  // Addresses
-  Route.group(() => {
+    // Addresses
     Route.resource('/addresses', 'AddressesController').only([
       'store',
       'update',
       'destroy',
       'index',
     ])
+
+    // Store
+    Route.get('/requests', 'StoresController.requests')
   }).middleware('auth')
 }).prefix('/api')

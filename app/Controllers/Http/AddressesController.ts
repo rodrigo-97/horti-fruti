@@ -17,7 +17,7 @@ export default class AddressesController {
       })
       return response.ok(address)
     } catch (error) {
-      console.log(error)
+      error
       return response.badRequest({ error: 'Could not create Address' })
     }
   }
@@ -32,7 +32,7 @@ export default class AddressesController {
 
       return response.ok(address)
     } catch (error) {
-      console.log(error)
+      error
       return response.badRequest({ error: 'Could not update Address' })
     }
   }
@@ -47,7 +47,7 @@ export default class AddressesController {
       await address.save()
       return response.noContent()
     } catch (error) {
-      console.log(error)
+      error
       return response.badRequest({ error: `Could not delete address with id ${params.id}` })
     }
   }
@@ -74,7 +74,7 @@ export default class AddressesController {
 
       return response.ok(client.addresses)
     } catch (error) {
-      console.log(error)
+      error
       return response.badRequest({
         error: `Could not find any address for user with e-mail ${authenticatedUser.email}`,
       })

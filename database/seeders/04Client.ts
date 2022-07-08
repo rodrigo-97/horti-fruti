@@ -18,19 +18,21 @@ export default class extends BaseSeeder {
       userId: user.id,
     })
 
-    Array(40)
-      .fill(1)
-      .forEach(async () => {
-        const user = await User.create({
-          email: faker.internet.email(),
-          password: faker.internet.password(15),
-          type: UserTypeEnum.ADMIN,
-        })
+    await Promise.all(
+      Array(40)
+        .fill(1)
+        .map(async () => {
+          const user = await User.create({
+            email: faker.internet.email(),
+            password: faker.internet.password(15),
+            type: UserTypeEnum.ADMIN,
+          })
 
-        await Client.create({
-          name: faker.name.findName(),
-          userId: user.id,
+          return Client.create({
+            name: faker.name.findName(),
+            userId: user.id,
+          })
         })
-      })
+    )
   }
 }
