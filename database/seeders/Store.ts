@@ -2,13 +2,14 @@ import BaseSeeder from '@ioc:Adonis/Lucid/Seeder'
 import Store from 'App/Models/Store'
 import User from 'App/Models/User'
 import { faker } from '@faker-js/faker'
+import { UserTypeEnum } from 'App/Enums/UserTypeEnum'
 
 export default class extends BaseSeeder {
   public async run() {
     const user = await User.create({
-      email: faker.internet.email(),
+      email: 'store@store.com',
       password: '123123123',
-      type: 'store',
+      type: UserTypeEnum.STORE,
     })
 
     await Store.create({
@@ -18,5 +19,23 @@ export default class extends BaseSeeder {
       blocked: true,
       userId: user.id,
     })
+
+    Array(40)
+      .fill(1)
+      .forEach(async () => {
+        const user = await User.create({
+          email: faker.internet.email(),
+          password: faker.internet.password(15),
+          type: UserTypeEnum.ADMIN,
+        })
+
+        await Store.create({
+          name: faker.name.findName(),
+          logo: faker.image.food(),
+          online: true,
+          blocked: true,
+          userId: user.id,
+        })
+      })
   }
 }

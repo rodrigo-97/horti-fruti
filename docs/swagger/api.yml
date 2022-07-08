@@ -1,0 +1,67 @@
+openapi: 3.0.3
+info:
+  title: Sample API
+  description: Optional multiline or single-line description in [CommonMark](http://commonmark.org/help/) or HTML.
+  version: 0.0.1
+  servers:
+    - url: http://localhost:3333/api
+      description: Development environment
+    - url: https://domain.com/api
+      description: Sandbox server (uses test data)
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: basic
+      bearerFormat: JWT
+  responses:
+    UnauthorizedError:
+      '200':
+        description: Authentication information is missing or invalid
+    BadRequestError:
+      description: Error from client
+    NiceRequest:
+      description: OK
+
+paths:
+  /api/login:
+    post:
+      summary: Authenticate user in API
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: "jullie@gmail.com"
+                password:
+                  type: string
+                  example: "123123123"
+      responses:
+        400:
+          $ref: "#components/response/UnauthorizedError"
+        200:
+          $ref: "#components/response/NiceRequest"
+
+  /api/clients:
+    get:
+      security: []
+      tags:
+        - Clients
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+# openapi: 3.0.0
+
+# info:
+#   tite: Sample API made with AdonisJS
+# paths:
+

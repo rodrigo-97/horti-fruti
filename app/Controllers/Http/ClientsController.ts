@@ -1,9 +1,10 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Database from '@ioc:Adonis/Lucid/Database'
-import { UserTypeEnum } from 'App/Enums/UserType'
+import { UserTypeEnum } from 'App/Enums/UserTypeEnum'
 import Client from 'App/Models/Client'
 import User from 'App/Models/User'
 import CreateClientValidator from 'App/Validators/CreateClientValidator'
+import EditClientValidator from 'App/Validators/EditClientValidator'
 
 export default class ClientsController {
   public async create({ request, response }: HttpContextContract) {
@@ -14,7 +15,7 @@ export default class ClientsController {
       const client = await User.create({
         email: payload.email,
         password: payload.password,
-        type: UserTypeEnum.client,
+        type: UserTypeEnum.CLIENT,
       })
 
       Client.create({
@@ -32,29 +33,40 @@ export default class ClientsController {
     }
   }
 
-  public async update({ request, response }: HttpContextContract) {
-    const payload = await request.validate(CreateClientValidator)
+  public async update({ request, response, auth }: HttpContextContract) {
+    const payload = await request.validate(EditClientValidator)
+    const authenticatedUser = await auth.use('api').authenticate()
     const trx = await Database.transaction()
 
     try {
-      const client = await User.create({
-        email: payload.email,
-        password: payload.password,
-        type: UserTypeEnum.client,
-      })
+      const user = await User.findByOrFail('id', authenticatedUser.id)
+      const client = await Client.findByOrFail('user_id', authenticatedUser.id)
 
-      Client.create({
-        userId: client.id,
+      if (payload.password) {
+        user.merge({
+          email: payload.email,
+          password: payload.password,
+        })
+      } else {
+        user.merge({
+          email: payload.email,
+        })
+      }
+
+      client.merge({
         name: payload.name,
         phone: payload.phone,
       })
 
+      await user.save()
+      await client.save()
       trx.commit()
-      return response.ok(client)
+
+      return response.noContent()
     } catch (error) {
       console.log(error)
       trx.rollback()
-      return response.unprocessableEntity()
+      return response.badRequest({ error: 'Could not possible to update client data' })
     }
   }
 

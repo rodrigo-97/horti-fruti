@@ -9,7 +9,11 @@ export default class UsersSchema extends BaseSchema {
       table.string('email', 255).notNullable().unique()
       table.string('password', 180).notNullable()
       table.string('remember_me_token').nullable()
-      table.string('type', 35).notNullable()
+      table.enu('type', ['CLIENT', 'ADMIN', 'STORE'], {
+        useNative: true,
+        enumName: 'user_type_enum',
+        existingType: true,
+      })
       table.timestamp('expires_at', { useTz: true })
       table.timestamp('created_at', { useTz: true }).notNullable()
       table.timestamp('updated_at', { useTz: true }).notNullable()

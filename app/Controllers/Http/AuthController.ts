@@ -1,7 +1,6 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import Database from '@ioc:Adonis/Lucid/Database'
 import { UserType } from '@Types/UserType'
-import { UserTypeEnum } from 'App/Enums/UserType'
+import { UserTypeEnum } from 'App/Enums/UserTypeEnum'
 import Admin from 'App/Models/Admin'
 import Client from 'App/Models/Client'
 import Store from 'App/Models/Store'
@@ -11,6 +10,8 @@ export default class AuthController {
   public async login({ auth, response, request }: HttpContextContract) {
     const email = request.input('email')
     const password = request.input('password')
+
+    console.log({ email, password })
 
     try {
       const user = await User.findByOrFail('email', email)
@@ -45,18 +46,18 @@ export default class AuthController {
     console.log(user.type)
 
     try {
-      if (user.type === UserTypeEnum.admin) {
+      if (user.type === UserTypeEnum.ADMIN) {
         const admin = await Admin.findByOrFail('userId', user.id)
         data.admin = admin
       }
 
-      if (user.type === UserTypeEnum.store) {
+      if (user.type === UserTypeEnum.STORE) {
         const store = await Store.findByOrFail('userId', user.id)
         console.log(store)
         data.store = store
       }
 
-      if (user.type === UserTypeEnum.client) {
+      if (user.type === UserTypeEnum.CLIENT) {
         const client = await Client.findByOrFail('userId', user.id)
         data.client = client
       }
