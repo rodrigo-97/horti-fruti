@@ -22,6 +22,9 @@ export default class Request extends BaseModel {
   @column()
   public comments: string | null
 
+  @column()
+  public value: number
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 
@@ -36,9 +39,6 @@ export default class Request extends BaseModel {
 
   @column()
   public addressId: number
-
-  @column()
-  public requestStatusId: number
 
   @column()
   public paymentMethodId: number

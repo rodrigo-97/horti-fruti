@@ -4,7 +4,7 @@ import City from 'App/Models/City'
 
 export default class extends BaseSeeder {
   public async run() {
-    Promise.all(
+    await Promise.all(
       Array(40)
         .fill(1)
         .map(() => {

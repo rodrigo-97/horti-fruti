@@ -31,6 +31,7 @@ export default class extends BaseSeeder {
           return Client.create({
             name: faker.name.findName(),
             userId: user.id,
+            phone: faker.phone.number('###############'),
           })
         })
     )

@@ -4,7 +4,7 @@ import State from 'App/Models/State'
 
 export default class extends BaseSeeder {
   public async run() {
-    Promise.all(
+    await Promise.all(
       Array(40)
         .fill(1)
         .map(() => {

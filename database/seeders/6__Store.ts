@@ -34,7 +34,6 @@ export default class extends BaseSeeder {
             name: faker.name.findName(),
             logo: faker.image.food(),
             online: true,
-            blocked: true,
             userId: user.id,
           })
         })
