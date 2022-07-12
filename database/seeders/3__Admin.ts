@@ -13,7 +13,7 @@ export default class extends BaseSeeder {
     })
 
     await Admin.create({
-      name: faker.name.findName(),
+      name: 'ADMIN',
       userId: user.id,
     })
 

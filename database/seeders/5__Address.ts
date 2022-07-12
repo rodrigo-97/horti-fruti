@@ -13,9 +13,9 @@ export default class extends BaseSeeder {
             clientId: faker.datatype.number({ min: 1, max: 40 }),
             complement: faker.address.secondaryAddress(),
             number: faker.address.buildingNumber(),
-            neighborhood: faker.address.streetSuffix(),
+            neighborhood: faker.lorem.word(),
             street: faker.address.street(),
-            referencePoint: faker.address.streetPrefix(),
+            referencePoint: faker.lorem.lines(1),
           })
         })
     )

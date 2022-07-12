@@ -36,6 +36,11 @@ Route.group(() => {
     ])
 
     // Store
-    Route.get('/requests', 'StoresController.requests')
+    Route.get('/stores', 'StoresController.requests')
+    Route.get('/stores/:id', 'StoresController.show')
+
+    // Requests
+    Route.get('/requests', 'RequestsController.index')
+    Route.post('/requests', 'RequestsController.store')
   }).middleware('auth')
 }).prefix('/api')

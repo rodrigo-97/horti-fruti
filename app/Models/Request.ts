@@ -25,12 +25,6 @@ export default class Request extends BaseModel {
   @column()
   public value: number
 
-  @column.dateTime({ autoCreate: true })
-  public createdAt: DateTime
-
-  @column.dateTime({ autoCreate: true, autoUpdate: true })
-  public updatedAt: DateTime
-
   @column()
   public clientId: number
 
@@ -42,6 +36,12 @@ export default class Request extends BaseModel {
 
   @column()
   public paymentMethodId: number
+
+  @column.dateTime({ autoCreate: true })
+  public createdAt: DateTime
+
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  public updatedAt: DateTime
 
   @hasOne(() => PaymentMethod, { foreignKey: 'id', localKey: 'paymentMethodId' })
   public paymentMethod: HasOne<typeof PaymentMethod>

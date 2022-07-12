@@ -17,7 +17,7 @@ export default class extends BaseSchema {
         .references('id')
         .inTable('stores')
         .onDelete('restrict')
-      table.timestamp('deleted_at', { useTz: true }).notNullable()
+      table.timestamp('deleted_at', { useTz: true }).nullable().defaultTo(null)
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
     })

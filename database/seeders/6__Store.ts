@@ -13,7 +13,7 @@ export default class extends BaseSeeder {
     })
 
     await Store.create({
-      name: faker.name.findName(),
+      name: 'STORE',
       logo: faker.image.food(),
       online: true,
       blocked: true,

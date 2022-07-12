@@ -13,7 +13,7 @@ export default class extends BaseSeeder {
     })
 
     await Client.create({
-      name: faker.name.findName(),
+      name: 'CLIENT',
       phone: faker.phone.number('###########'),
       userId: user.id,
     })
