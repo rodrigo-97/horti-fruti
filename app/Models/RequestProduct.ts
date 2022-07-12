@@ -18,6 +18,9 @@ export default class RequestProduct extends BaseModel {
   @column()
   public value: number
 
+  @column()
+  public comments: string | null
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 

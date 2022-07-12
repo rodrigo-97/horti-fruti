@@ -16,7 +16,6 @@ export default class extends BaseSeeder {
       name: 'STORE',
       logo: faker.image.food(),
       online: true,
-      blocked: true,
       userId: user.id,
     })
 

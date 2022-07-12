@@ -9,9 +9,6 @@ export default class RequestStatus extends BaseModel {
   @column({ isPrimary: true })
   public statusId: number
 
-  @column()
-  public comments: string | null
-
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 
