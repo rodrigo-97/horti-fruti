@@ -47,7 +47,7 @@ export default class RequestsController {
         clientId: client.id,
         changeMoney: payload.change_money,
         comments: payload.comments,
-        deliveryFee: store.deliveryFee,
+        deliveryFee: +store.deliveryFee,
         paymentMethodId: payload.payment_method_id,
         storeId: store.storeId,
         uid,
@@ -67,13 +67,52 @@ export default class RequestsController {
         })
       )
 
-      await RequestStatus.create({ requestId: request.id, statusId: 1 })
-
+      const requestStatus = await RequestStatus.create({ requestId: request.id, statusId: 1 })
       trx.commit()
+
+      return response.ok({
+        request,
+        requestStatus,
+      })
     } catch (error) {
       console.log(error)
       trx.rollback()
       return response.badRequest({ error: 'Could not create request' })
+    }
+  }
+
+  public async index({ response }: HttpContextContract) {
+    try {
+      const requests = await Request.query()
+        .preload('paymentMethod')
+        .preload('requestStatus')
+        .preload('store')
+
+      if (requests.length === 0) {
+        return response.notFound({ error: 'Could not find any request' })
+      }
+
+      return response.ok(requests)
+    } catch (error) {
+      return response.badRequest({ error: 'Could not find requests' })
+    }
+  }
+
+  public async show({ response, params }: HttpContextContract) {
+    try {
+      const requests = await Request.query()
+        .preload('paymentMethod')
+        .preload('requestStatus')
+        .preload('store')
+        .where({ id: params.id })
+
+      if (requests.length === 0) {
+        return response.notFound({ error: 'Could not find any request' })
+      }
+
+      return response.ok(requests)
+    } catch (error) {
+      return response.badRequest({ error: 'Could not find requests' })
     }
   }
 }

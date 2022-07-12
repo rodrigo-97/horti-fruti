@@ -14,18 +14,16 @@ Route.group(() => {
 
   Route.group(() => {
     // Client
-    Route.group(() => {
-      Route.get('/', 'ClientsController.findAll')
-    }).prefix('/clients')
+    Route.resource('/clients', 'ClientsController')
 
     // Client
-    Route.group(() => {
-      Route.post('/', 'CitiesController.create')
-      Route.get('/', 'CitiesController.findAll')
-      Route.get('/:id', 'CitiesController.find')
-      Route.put('/:id', 'CitiesController.update')
-      Route.delete('/:id', 'CitiesController.delete')
-    }).prefix('/cities')
+    Route.resource('/cities', 'CitiesController').only([
+      'store',
+      'update',
+      'index',
+      'show',
+      'destroy',
+    ])
 
     // Addresses
     Route.resource('/addresses', 'AddressesController').only([
@@ -40,7 +38,6 @@ Route.group(() => {
     Route.get('/stores/:id', 'StoresController.show')
 
     // Requests
-    Route.get('/requests', 'RequestsController.index')
-    Route.post('/requests', 'RequestsController.store')
+    Route.resource('/requests', 'RequestsController').only(['store', 'index', 'show'])
   }).middleware('auth')
 }).prefix('/api')

@@ -8,18 +8,18 @@ export default class StoresController {
   public async show({ params, response }: HttpContextContract) {
     const storeId = +params.id
 
-    const cities = []
+    const cities: Array<any> = []
     const storeCities = await CitiesStore.query().where({ storeId })
 
     try {
-      for await (const storeCity of storeCities) {
-        const c = await City.findByOrFail('id', storeCity.cityId)
+      storeCities.forEach(async (e) => {
+        const c = await City.findByOrFail('id', e.cityId)
         cities.push({
           id: c.id,
           city: c.name,
-          feliveryFee: storeCity.deliveryFee,
+          feliveryFee: e.deliveryFee,
         })
-      }
+      })
 
       const store = Store.query()
         .where({ id: storeId })

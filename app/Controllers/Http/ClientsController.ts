@@ -70,7 +70,7 @@ export default class ClientsController {
     }
   }
 
-  public async findAll({ response }: HttpContextContract) {
+  public async index({ response }: HttpContextContract) {
     try {
       const clients = await Client.query().preload('user').select('*')
 
@@ -84,7 +84,7 @@ export default class ClientsController {
     }
   }
 
-  public async find({ response, request }: HttpContextContract) {
+  public async show({ response, request }: HttpContextContract) {
     const id = await request.param('id', 0)
     try {
       const client = await Client.query().preload('user').select('*').where({ id })

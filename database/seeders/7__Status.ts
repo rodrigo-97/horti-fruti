@@ -16,6 +16,12 @@ export default class extends BaseSeeder {
       {
         status: 'DELIVERED_REQUEST',
       },
+      {
+        status: 'NOT_DELIVERED',
+      },
+      {
+        status: 'CANCELED',
+      },
     ])
   }
 }
