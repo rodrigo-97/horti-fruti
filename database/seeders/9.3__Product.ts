@@ -13,7 +13,7 @@ export default class extends BaseSeeder {
             description: faker.lorem.sentence(),
             image: faker.image.food(),
             name: faker.commerce.product.name,
-            price: faker.commerce.price(50, 200),
+            price: +faker.commerce.price(50, 200),
             unity: faker.datatype.number({ min: 1, max: 3 }),
           })
         })
