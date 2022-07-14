@@ -7,7 +7,7 @@ import CreateClientValidator from 'App/Validators/CreateClientValidator'
 import EditClientValidator from 'App/Validators/EditClientValidator'
 
 export default class ClientsController {
-  public async create({ request, response }: HttpContextContract) {
+  public async store({ request, response }: HttpContextContract) {
     const payload = await request.validate(CreateClientValidator)
     const trx = await Database.transaction()
 

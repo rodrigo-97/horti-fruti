@@ -34,7 +34,6 @@ export default class StoresController {
         cities,
       })
     } catch (error) {
-      console.log(error)
       return response.badRequest()
     }
   }
@@ -54,7 +53,6 @@ export default class StoresController {
 
       return response.ok(requests)
     } catch (error) {
-      console.log(error)
       return response.badRequest({
         error: 'Could not find any request from authenticated user',
       })

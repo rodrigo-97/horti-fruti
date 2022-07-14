@@ -75,7 +75,6 @@ export default class RequestsController {
         requestStatus,
       })
     } catch (error) {
-      console.log(error)
       trx.rollback()
       return response.badRequest({ error: 'Could not create request' })
     }
