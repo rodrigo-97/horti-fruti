@@ -25,7 +25,7 @@ export default class ClientsController {
       })
 
       trx.commit()
-      return response.ok(client)
+      return response.created(client)
     } catch (error) {
       error
       trx.rollback()
@@ -87,11 +87,7 @@ export default class ClientsController {
   public async show({ response, request }: HttpContextContract) {
     const id = await request.param('id', 0)
     try {
-      const client = await Client.query().preload('user').select('*').where({ id })
-
-      if (client.length === 0) {
-        return response.notFound({ error: `Could not find client with id = ${id}` })
-      }
+      const client = await Client.query().preload('user').select('*').where({ id }).firstOrFail()
 
       return response.ok(client)
     } catch (error) {
