@@ -3,7 +3,8 @@
 Descreve os endpoints existentes e os modelos usados para as requisições
 
 ### Prefixo da API
-`/api`
+
+ `/api`
 
 ### Endpoints
 
@@ -11,51 +12,49 @@ Descreve os endpoints existentes e os modelos usados para as requisições
 
 |Caminho   |  Método | Retorno
 |-         |-        |-        
-| `/auth/me` | `GET` | Dados do usuário logado de acordo com o tipo de usuário
-| `/login` | `POST` | Token de autenticação
+| `/auth/me` | `GET` | Dados do usuário logado de acordo com o tipo de usuário |
+| `/login` | `POST` | Token de autenticação |
 
 #### Clientes
 
 |Caminho       |  Método | Retorno
 |-             |-        |-        
-| `/clients` | `POST` | Dados cadastrais do cliente
-| `/clients` | `GET` | Lista de clientes
-| `/clients/:id` | `GET` | Cliente com `id` passado como parâmetro
-| `/clients/:id` | `PUT` | Apenas `status code 204`
-
-| `/clients/:id` | `DELETE` | Apenas `status code 204`
+| `/clients` | `POST` | Dados cadastrais do cliente |
+| `/clients` | `GET` | Lista de clientes |
+| `/clients/:id` | `GET` | Cliente com `id` passado como parâmetro |
+| `/clients/:id` | `PUT` | Apenas `status code 204` |
+| `/clients/:id` | `DELETE` | Apenas `status code 204` | |
 
 #### Cidades
 
 |Caminho       |  Método | Retorno
 |-             |-        |-        
-| `/cities` | `POST` | Dados cadastrais da cidade
-| `/cities` | `GET` | Lista de cidades
+| `/cities` | `POST` | Dados cadastrais da cidade |
+| `/cities` | `GET` | Lista de cidades |
 
 #### Endereços
 
 |Caminho         |  Método | Retorno
 |-               |-        |-        
-| `/addresses` | `POST` | Dados cadastrais do endereço
-| `/addresses` | `GET` | Lista de endereços
-| `/addresses/:id` | `PUT` | Apenas `status code 204`
-
-| `/addresses/:id` | `DELETE` | Apenas `status code 204`
+| `/addresses` | `POST` | Dados cadastrais do endereço |
+| `/addresses` | `GET` | Lista de endereços |
+| `/addresses/:id` | `PUT` | Apenas `status code 204` | |
+| `/addresses/:id` | `DELETE` | Apenas `status code 204` |
 
 #### Lojas
 
 |Caminho         |  Método | Retorno
 |-               |-        |-        
-| `/stores` | `GET` | Lista de lojas
-| `/stores/:id` | `GET` | Loja e as cidades as quais ela pertencece
+| `/stores` | `GET` | Lista de lojas |
+| `/stores/:id` | `GET` | Loja e as cidades as quais ela pertencece |
 
 #### Pedidos
 
 |Caminho         |  Método | Retorno
 |-               |-        |-        
-| `/requests` | `GET` | Lista de pedidos do usuário logado
-| `/requests/:id` | `GET` | Pedido com `id` passado como parâmetro
-| `/requests` | `POST` | Dados cadastrais do pedido
+| `/requests` | `GET` | Lista de pedidos do usuário logado |
+| `/requests/:id` | `GET` | Pedido com `id` passado como parâmetro |
+| `/requests` | `POST` | Dados cadastrais do pedido |
 
 ### Modelos
 
